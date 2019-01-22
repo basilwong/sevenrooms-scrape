@@ -1,9 +1,7 @@
 from datetime import datetime
-from datetime import timedelta
-
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
+import os
 
 class SevenroomScraper:
 
@@ -18,7 +16,8 @@ class SevenroomScraper:
         self.password = password
         self.date = datetime.today()
 
-        self.driver = webdriver.Chrome()
+        driver_path = os.path.join('..', 'assets', 'chromedriver.exe')
+        self.driver = webdriver.Chrome(driver_path)
         self.driver.get("https://www.sevenrooms.com/login")
         # Login
         self.driver.find_element_by_name("email").send_keys(email)

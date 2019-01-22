@@ -1,7 +1,6 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-
-# https://www.twilio.com/blog/2017/02/an-easy-way-to-read-and-write-to-a-google-spreadsheet-in-python.html
+import os
 
 class PrintToGoogleSheets:
 
@@ -11,8 +10,9 @@ class PrintToGoogleSheets:
 
         :param sheet_name: title of the google sheet to be edited
         """
+        cred_path = os.path.join('..', 'assets', 'client_secret.json')
         self.scope = ['https://spreadsheets.google.com/feeds' + ' ' + 'https://www.googleapis.com/auth/drive']
-        self.creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', self.scope)
+        self.creds = ServiceAccountCredentials.from_json_keyfile_name(cred_path, self.scope)
         self.client = gspread.authorize(self.creds)
         self.sheet = self.client.open(sheet_name).sheet1
         self.names_list = self.sheet.col_values(1)
@@ -41,6 +41,3 @@ class PrintToGoogleSheets:
                 self.sheet.append_row(row)
                 self.update_names_list()
 
-
-if __name__ == "__main__":
-    printer = PrintToGoogleSheets()
