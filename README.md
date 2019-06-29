@@ -28,7 +28,7 @@ data.
 ### Dependencies
 
 ``` 
-pip3 install os datetime selenium bs4 oauth2client
+pip3 install datetime selenium bs4 oauth2client
 ```
 
 ## Use
